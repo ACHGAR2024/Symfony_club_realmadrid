@@ -1,121 +1,98 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Joueurs{% endblock %}
+{% block title %}
+  equipe premiere de basketball du Real Madrid
+{% endblock %}
 
 {% block body %}
+  <div class="container py-5">
+    <header class="text-center mb-5">
+      {% for club in clubs %}
+        <h1 class="display-4 font-weight-bold bg-transparent text-shadow text-dark" style="padding: 0.5rem; border-radius: 0.5rem; background-image: linear-gradient(to bottom right, rgba(255,255,255,0.5), rgba(255,255,255,0.5));">{{ club.name }}</h1>
+        <p class="font-italic font-weight-bold text-muted mb-0 bg-transparent text-shadow" style="padding: 0.5rem; border-radius: 0.5rem; background-image: linear-gradient(to bottom right, rgba(255,255,255,0.5), rgba(255,255,255,0.5));">{{ club.description }}</p>
+      {% endfor %}
+    </header>
 
-
-
-
-
-
-<div class="container py-5">
-  
-  <header class="text-center mb-5">
-  {% for club in clubs %}
-    <h1 class="display-4 font-weight-bold bg-transparent text-shadow text-dark" style="padding: 0.5rem; border-radius: 0.5rem; background-image: linear-gradient(to bottom right, rgba(255,255,255,0.5), rgba(255,255,255,0.5));">{{ club.name }}</h1>
-    <p class="font-italic font-weight-bold text-muted mb-0 bg-transparent text-shadow" style="padding: 0.5rem; border-radius: 0.5rem; background-image: linear-gradient(to bottom right, rgba(255,255,255,0.5), rgba(255,255,255,0.5));">{{club.description}}</p>
-{% endfor %}
-       
-  </header>
-
-
-  <!-- Teams-->
- 
-  <div class="row pb-5 mb-4" >
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
-
-      <div class="card rounded shadow-sm border-0">
-        <div class="card-body p-4">
-        {% for team in teams %}
-        <img src="{{ asset('uploads/images/' ~ team.photo) }}" alt="" class="img-fluid d-block mx-auto ">
-   
-    
-    <h6 class="card-title text-center mb-0 text-dark"> {{ team.name }}</h6>
-    <br>
-          <p class="small text-muted font-italic">{{team.description}}</p> {% endfor %}
-          
+    <!-- Teams -->
+    <div class="row pb-5 mb-4">
+      {% for team in teams %}
+        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+          <div class="card rounded shadow-sm border-0">
+            <div class="card-body p-4">
+              <img src="{{ asset('uploads/images/' ~ team.photo) }}" alt="" class="img-fluid d-block mx-auto" />
+              <h6 class="card-title text-center mb-0 text-dark">{{ team.name }}</h6>
+              <br />
+              <p class="small text-muted font-italic">{{ team.description }}</p>
+            </div>
+          </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
+
     <!-- Entraineur -->
-    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
-   
-    <div class="card rounded shadow-sm border-0 ">
-      <div class="card-body p-0">
-        <div class="bg-dark px-5 py-4 text-center card-img-top"><img src="https://www.torneocma.com/wp-content/uploads/sites/72/2020/01/IMG_8540-e1580473674145.jpg" alt="..." width="100" class="rounded-circle mb-2 img-thumbnail d-block mx-auto">
-          <h5 class="text-white mb-0">Chus Mateo</h5>
-          <p class="small text-white mb-0">Entraîneur</p>
-        </div>
-        <div class="p-4 d-flex justify-content-center">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item">
-              <h5 class="font-weight-bold mb-0 d-block text-dark">13</h5><small class="text-muted text-dark">Palmarès</small>
-            </li>
-            <li class="list-inline-item">
-              <h5 class="font-weight-bold mb-0 d-block text-dark">8</h5><small class="text-muted text-dark">clubs</small>
-            </li>
-          </ul>
-        </div>
-      </div>
-    
-  </div>
-
-  
-
-  
-
-
-  
-
-  
-
-  
-</div>
-  
-<!-- Joueurs -->
-
-  <div class="row pb-6 mb-5 mt-5">
-  {% for member in members %}
-    <div class="col-lg-2 col-md-4 mb-5 mb-lg-2 " onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
-      <!-- Card-->
-      <div class="card shadow-sm border-0 rounded" style="transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)';" onmouseout="this.style.transform='translateY(0px)';">
-        <div class="card-body p-0"><img class="img-fluid card-img-top" src="{{ asset('uploads/images/' ~ member.photo) }}" alt="{{ member.firstname }} {{ member.lastname }}" height="100 px">
-          <div class="p-4">
-        
-            <h6 class="mb-0 text-dark text-ms-center">{{ member.firstname }} {{ member.lastname }}</h6>
-            <p class="small text-muted">{{ member.birthDate ? member.birthDate|date('d-m-Y') : '' }}</p>
-            <ul class="social mb-0 list-inline mt-3">
-              <li class="small text-danger text-bold" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#dc3545';">  {% set age = 'N/A' %}
-              {% if member.birthDate %}
-                  {% set now = 'now'|date('U') %}
-                  {% set birthDate = member.birthDate|date('U') %}
-                  {% set age = ((now - birthDate) / (60 * 60 * 24 * 365))|round(0, 'floor') %}
-              {% endif %}
-              {{ age }} ans</li>
-              <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';"><span class="badge">Numéro: </span>{{ member.numero }}</li>
-              <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';"><span class="badge">Post: </span>{{ member.post }}</li>
-              <li class="small text-muted" 
-    onmouseover="this.style.color='#ff6347';" 
-    onmouseout="this.style.color='#6c757d';"><span class="badge">Fin de contrat:</span><br> 
-    {{ member.contratActuel ? member.contratActuel|date('d-m-Y') : '' }}
-</li>
-
-
-            
-              <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';"><span class="badge">Salaire : </span><span class="badge badge-info">{{ ((member.salaire * 10)*12)/1000000 }} M.€</span></li>
-
-            </ul>
+    <div class="row pb-5 mb-4">
+      <div class="col-lg-3 col-md-6 mb-4 mb-lg-0" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+        <div class="card rounded shadow-sm border-0">
+          <div class="card-body p-0">
+            <div class="bg-dark px-5 py-4 text-center card-img-top">
+              <img src="https://www.torneocma.com/wp-content/uploads/sites/72/2020/01/IMG_8540-e1580473674145.jpg" alt="..." width="100" class="rounded-circle mb-2 img-thumbnail d-block mx-auto" />
+              <h5 class="text-white mb-0">Chus Mateo</h5>
+              <p class="small text-white mb-0">Entraîneur</p>
+            </div>
+            <div class="p-4 d-flex justify-content-center">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                  <h5 class="font-weight-bold mb-0 d-block text-dark">13</h5>
+                  <small class="text-muted text-dark">Palmarès</small>
+                </li>
+                <li class="list-inline-item">
+                  <h5 class="font-weight-bold mb-0 d-block text-dark">8</h5>
+                  <small class="text-muted text-dark">clubs</small>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
-{% endfor %}
-   
+
+    <!-- Joueurs -->
+    <div class="row pb-6 mb-5 mt-5">
+      {% for member in members %}
+        <div class="col-lg-2 col-md-4 mb-5 mb-lg-2" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';">
+          <div class="card shadow-sm border-0 rounded" style="transition: transform 0.3s;" onmouseover="this.style.transform='translateY(-5px)';" onmouseout="this.style.transform='translateY(0px)';">
+            <div class="card-body p-0">
+              <img class="img-fluid card-img-top" src="{{ asset('uploads/images/' ~ member.photo) }}" alt="{{ member.firstname }} {{ member.lastname }}" height="100 px" />
+              <div class="p-4">
+                <h6 class="mb-0 text-dark text-ms-center">{{ member.firstname }} {{ member.lastname }}</h6>
+                <p class="small text-muted">{{ member.birthDate ? member.birthDate|date('d-m-Y') : '' }}</p>
+                <ul class="social mb-0 list-inline mt-3">
+                  <li class="small text-danger text-bold" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#dc3545';">
+                    {% if member.birthDate %}
+                      {% set now = 'now'|date('U') %}
+                      {% set birthDate = member.birthDate|date('U') %}
+                      {% set age = (now - birthDate)|round(0, 'floor') %}
+                    {% endif %}
+                    {{ (now|date('Y')) - (member.birthDate|date('Y')) }} ans
+                  </li>
+                  <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';">
+                    <span class="badge">Numéro:</span>{{ member.numero }}
+                  </li>
+                  <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';">
+                    <span class="badge">Post:</span>{{ member.post }}
+                  </li>
+                  <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';">
+                    <span class="badge">Fin de contrat:</span><br />{{ member.contratActuel ? member.contratActuel|date('d-m-Y') : '' }}
+                  </li>
+                  <li class="small text-muted" onmouseover="this.style.color='#ff6347';" onmouseout="this.style.color='#6c757d';">
+                    <span class="badge">Salaire:</span><span class="badge badge-info">{{ member.salaire * 10 * 12 / 1000000 }} M.€</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   </div>
-
-  
-
-
-
 {% endblock %}

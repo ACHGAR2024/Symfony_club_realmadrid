@@ -1,10 +1,14 @@
-{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{# templates/bundles/TwigBundle/Exception/error403.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>erreur 403</h1>
+{% block title %}
+  Accès refusé
+{% endblock %}
 
-    <p>
-        Vous n'avez pas les droits pour voir cette page. Cliquez <a href="{{ path('app_homepage') }}">ici</a>.
-    </p>
+{% block body %}
+  <h1>Accès refusé (403)</h1>
+
+  <p>
+    Vous n'avez pas l'autorisation d'accéder à cette page. Cliquez <a href="{{ path('app_index') }}">ici</a> pour revenir à l'accueil.
+  </p>
 {% endblock %}

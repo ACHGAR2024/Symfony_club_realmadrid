@@ -73,6 +73,7 @@ class MemberType extends AbstractType
                             'image/jpeg',
                             'image/png',
                             'image/gif',
+                            'image/webp',
                         ],
                         'mimeTypesMessage' => 'Veuillez uploader un fichier d\'image valide (JPEG, PNG, GIF)',
                     ])

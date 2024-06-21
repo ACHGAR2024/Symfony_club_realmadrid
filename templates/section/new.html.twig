@@ -1,16 +1,11 @@
 {% extends 'dashboard.html.twig' %}
 
-{% block title %}Gestion des Sections{% endblock %}
-
-{% block content %}
-    
-       
-           
-                <h1 class="bg-dark text-white p-3 rounded">Créer une nouvelle section</h1>
-                {{ include('section/_form.html.twig') }}
-                <a href="{{ path('app_section_index') }}" class="btn btn-dark mt-2">Retour à la liste</a>
-           
-        
-   
+{% block title %}
+  Gestion des Sections
 {% endblock %}
 
+{% block content %}
+  <h1 class="bg-dark text-white p-3 rounded">Créer une nouvelle section</h1>
+  {{ include('section/_form.html.twig') }}
+  <a href="{{ path('app_section_index') }}" class="btn btn-dark mt-2">Retour à la liste</a>
+{% endblock %}

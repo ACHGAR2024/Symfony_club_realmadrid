@@ -1,18 +1,15 @@
 {% extends 'dashboard.html.twig' %}
 
-{% block title %}Gestion des Sections{% endblock %}
-
-{% block content %}
-    
-        
-            <div class="col-md-6">
-            <br>
-                <h1 class="bg-dark text-white p-3 rounded">Créer un nouveau membre</h1>
-                {{ include('member/_form.html.twig') }}
-                <br>
-                <a href="{{ path('app_member_index') }}" class="btn btn-dark">Retour à la liste</a>
-            </div>
-        
-  
+{% block title %}
+  Gestion des Sections
 {% endblock %}
 
+{% block content %}
+  <div class="col-md-6">
+    <br />
+    <h1 class="bg-dark text-white p-3 rounded">Créer un nouveau membre</h1>
+    {{ include('member/_form.html.twig') }}
+    <br />
+    <a href="{{ path('app_member_index') }}" class="btn btn-dark">Retour à la liste</a>
+  </div>
+{% endblock %}

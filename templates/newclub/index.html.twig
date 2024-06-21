@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flux RSS Real Madrid</title>
+    <!-- Ajoutez ici vos liens vers des fichiers CSS si nécessaire -->
+    <style>
+      .rss-item {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .rss-item h2 {
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!--   Ajoutez ici votre flux RSS 
+    <div id="rss-feed"></div>
+     <script type="text/javascript">
+        // URL de votre flux RSS
+        const rssUrl = 'https://e00-marca.uecdn.es/rss/en/football/real-madrid.xml';
+
+        // Fonction pour charger le flux RSS
+        function loadRSSFeed() {
+            fetch(rssUrl)
+                .then(response => response.text())
+                .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+                .then(data => {
+                    const items = data.querySelectorAll("item");
+
+                    let rssFeedContent = '';
+
+                    items.forEach(item => {
+                        const title = item.querySelector('title').textContent;
+                        const link = item.querySelector('link').textContent;
+                        const description = item.querySelector('description').textContent;
+
+                        rssFeedContent += `
+                            <div class="rss-item">
+                                <h2><a href="${link}" target="_blank">${title}</a></h2>
+                                <p>${description}</p>
+                            </div>
+                        `;
+                    });
+
+                    document.getElementById('rss-feed').innerHTML = rssFeedContent;
+                })
+                .catch(error => console.error('Error fetching RSS feed:', error));
+        }
+
+        // Appeler la fonction pour charger le flux RSS au chargement de la page
+        window.onload = loadRSSFeed;
+    </script>  -->
+  </body>
+</html>

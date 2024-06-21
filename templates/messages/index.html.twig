@@ -1,64 +1,36 @@
-{% extends 
-    'dashboard.html.twig' %}
+{% extends 'dashboard.html.twig' %}
 {% block title %}
-    Gestion des Membres
+  Gestion des Membres
 {% endblock %}
 {% block content %}
-    <h1 class="bg-dark text-white p-3 rounded mb-2">
-        Messages
-    </h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    Prénom
-                </th>
-                <th>
-                    Nom
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Besoin
-                </th>
-                <th>
-                    Message
-                </th>
-                <th>
-                    Actions
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for message in messages %}
-                <tr>
-                    <td>
-                        {{ message.name }}
-                    </td>
-                    <td>
-                        {{ message.surname }}
-                    </td>
-                    <td>
-                        {{ message.email }}
-                    </td>
-                    <td>
-                        {{ message.need }}
-                    </td>
-                    <td>
-                        {{ message.message }}
-                    </td>
-                    <td>
-                        <form method="post" action="{{ path('message_delete', {'id': message.id}) }}" onsubmit="return confirm('Voulez-vous supprimer cet enregistrement ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete-message') }}">
-                                <button class="btn btn-danger btn-sm">
-                                    Supprimer
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endblock %}
-    
+  <h1 class="bg-dark text-white p-3 rounded mb-2">Messages</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Besoin</th>
+        <th>Message</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for message in messages %}
+        <tr>
+          <td>{{ message.name }}</td>
+          <td>{{ message.surname }}</td>
+          <td>{{ message.email }}</td>
+          <td>{{ message.need }}</td>
+          <td>{{ message.message }}</td>
+          <td>
+            <form method="post" action="{{ path('message_delete', { id: message.id }) }}" onsubmit="return confirm('Voulez-vous supprimer cet enregistrement ?');">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete-message') }}" />
+              <button class="btn btn-danger btn-sm">Supprimer</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
