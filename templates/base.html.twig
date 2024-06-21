@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+           <style>
+
+/* Importing fonts from Google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Reseting */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+.nav {
+    background-color: rgba(3, 155, 230, 0.7);
+}
+
+body {
+    background: #ecf0f3;
+  /*  background-image: url("https://picsum.photos/1100/1080?random=1");*/
+}
+
+.wrapper {
+    max-width: 400px;
+    min-height: 500px;
+    margin: 20px auto;
+    padding: 30px 30px 30px 30px;
+    background-color: #ecf0f3;
+    border-radius: 15px;
+    box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #fff;
+}
+
+.logo {
+    width: 80px;
+    margin: auto;
+}
+
+.logo img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 0px 3px #5f5f5f,
+        0px 0px 0px 5px #ecf0f3,
+        8px 8px 15px #a7aaa7,
+        -8px -8px 15px #fff;
+}
+
+.wrapper .name {
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding-left: 10px;
+    color: #555;
+}
+
+.wrapper .form-field input {
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+    background: none;
+    font-size: 0.8rem;
+    color: #666;
+    padding: 10px 15px 10px 10px;
+    /* border: 1px solid red; */
+}
+
+.wrapper .form-field {
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+
+.wrapper .form-field .fas {
+    color: #555;
+}
+
+.wrapper .btn {
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    background-color: #03A9F4;
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1,
+        -3px -3px 3px #fff;
+    letter-spacing: 1.3px;
+}
+.btncontact {
+    box-shadow: none;
+    width: 100%;
+    height: 40px;
+    background-color: #03A9F4;
+    color: #fff;
+    border-radius: 25px;
+    box-shadow: 3px 3px 3px #b1b1b1,
+        -3px -3px 3px #fff;
+    letter-spacing: 1.3px;
+}
+
+.wrapper .btn:hover {
+    background-color: #039BE5;
+}
+
+.wrapper a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: #03A9F4;
+}
+
+.wrapper a:hover {
+    color: #039BE5;
+}
+
+@media(max-width: 380px) {
+    .wrapper {
+        margin: 10px 10px;
+        padding: 15px 15px 15px 15px;
+    }
+}
+
+
+/**********************************/
+
+
+            .custom-form-check {
+                margin-bottom: 15px;
+                /* Add any other styling as needed */
+            }
+            
+            .custom-label {
+                display: block;
+                margin-top: 5px;
+                /* Add any other styling as needed */
+            }
+            
+            .custom-form-control {
+                /* Styles for the form control (checkbox or radio button) */
+            }
+            
+            .custom-link {
+                color: #337ab7; /* Example color for links */
+                text-decoration: none;
+                /* Add any other styling as needed */
+            }
+            .navbar {
+    margin-bottom: 20px;
+}
+
+.btn-search-icon {
+    width: 16px;
+    height: 16px;
+}
+
+@media (max-width: 767px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+    .navbar-nav .btn {
+        width: 100%;
+    }
+}
+#random-li {
+  /* couleur d'arrière-plan aléatoire */
+  background-color: rgb(random(0, 255), random(0, 255), random(0, 255));
+
+  /* couleur de texte basée sur la luminosité relative de la couleur d'arrière-plan */
+  color: rgb(
+    var(--red),
+    var(--green),
+    var(--blue)
+  ) var(--luminosity) <= 128 ? #fff : #000;
+
+  /* variables pour les valeurs RVB de la couleur d'arrière-plan */
+  --red: calc(0.299 * var(--r));
+  --green: calc(0.587 * var(--g));
+  --blue: calc(0.114 * var(--b));
+
+  /* variables pour la luminosité relative et les valeurs RVB de la couleur d'arrière-plan */
+  --luminosity: calc(var(--red) + var(--green) + var(--blue));
+  --r: var(--background-color-r);
+  --g: var(--background-color-g);
+  --b: var(--background-color-b);
+}
+
+video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .social-link {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  border-radius: 50%;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.social-link:hover,
+.social-link:focus {
+  background: #ddd;
+  text-decoration: none;
+  color: #555;
+}
+
+.progress {
+  height: 10px;
+}
+
+
+            </style>
+       
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuWxCfR3k1qBaG78gRYlCJ2MXaX2Ck4ozkVZAIE5zXF1JjzM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      
+        {% endblock %}
+    </head>
+
+    <body class="content">
+     <video autoplay loop muted>
+        <source src="https://cdn.pixabay.com/video/2020/12/14/59217-491926143.mp4" type="video/mp4">
+        <!-- Ajoutez d'autres formats vidéo ici (WebM, Ogg, etc.) -->
+    </video>
+       <nav class="navbar navbar-expand-lg navbar-light  border-radius rounded bg-opacity-75 " style="background-color: rgba(255, 255, 255, 0.2)">
+    <a class="navbar-brand" href="#">
+        <img src="https://img.icons8.com/?size=42&id=37347&format=png&color=000000" alt="Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item {{ app.request.get('_route') == 'home' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ path('home') }}">Accueil <span class="sr-only">(current)</span></a>
+        {% if app.request.get('_route') == 'home' %}
+            <span class="sr-only">(current)</span>
+        {% endif %}
+    </li>
+    <li class="nav-item {{ app.request.get('_route') == 'app_player' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ path('app_player') }}">Foot</a>
+        {% if app.request.get('_route') == 'app_player' %}
+            <span class="sr-only">(current)</span>
+        {% endif %}
+    </li>
+    <li class="nav-item {{ app.request.get('_route') == 'app_basket' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ path('app_basket') }}">Basket</a>
+        {% if app.request.get('_route') == 'app_basket' %}
+            <span class="sr-only">(current)</span>
+        {% endif %}
+    </li>
+    <li class="nav-item {{ app.request.get('_route') == 'app_contact' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ path('app_contact') }}">Contact</a>
+        {% if app.request.get('_route') == 'app_contact' %}
+            <span class="sr-only">(current)</span>
+        {% endif %}
+    </li>
+</ul>
+
+        <ul class="navbar-nav ml-auto">
+        {% if app.user is not null %}
+        <a href="{{ path('app_logout') }}" class="btn btn-dark btn-sm m-1">
+            Déconnexion
+        </a>
+        <a href="{{ path('app_dashboard') }}" >
+           <img src="https://img.icons8.com/?size=35&id=Z5Cz9gML8rsf&format=png&color=000000" alt="Logo">
+        </a>
+
+    {% else %}
+        <a href="{{ path('app_login') }}" class="btn btn-outline-success btn-sm m-1">
+            Se connecter
+        </a>
+        <a href="{{ path('app_register') }}" class="btn btn-outline-secondary btn-sm m-1">
+            S'inscrire
+        </a>
+    {% endif %}
+        </ul>
+        
+    </div>
+</nav>
+
+<main class="container">
+<div class="container mt-4">
+        {% for label, messages in app.flashes %}
+            <div class="alert alert-{{ label }}">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+        {% block body %}{% endblock %}
+    </main>
+        <footer class=" mt-5 text-dark rounded" style="background-color: rgba(255, 255, 255, 0.2)">
+            <div class="">
+                <div class="row">
+                    <div class="pt-3 text-dark pl-5">
+                        <p>© 2024 Symfony - Tous droits réservés</p>
+                    </div>
+                    <div class="">
+                       
+                    </div>
+                    
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

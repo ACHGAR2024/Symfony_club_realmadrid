@@ -1,0 +1,36 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Gestion des Sections{% endblock %}
+
+{% block content %}
+    
+        
+            <h1 class="bg-dark text-white p-3 rounded">Section</h1>
+            
+        <img src="{{ asset('uploads/images/' ~ section.photo) }}" width="100" class="rounded m-2">
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th class="bg-dark text-white">{{ 'Id'|trans }}</th>
+                        <td>{{ section.id }}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-dark text-white">{{ 'Name'|trans }}</th>
+                        <td>{{ section.name }}</td>
+                    </tr>
+                    <tr>
+                        <th class="bg-dark text-white">{{ 'Description'|trans }}</th>
+                        <td>{{ section.description }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="text-center">
+                <a href="{{ path('app_section_index') }}" class="btn btn-dark">{{ 'Retour à la liste'|trans }}</a>
+                <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-info">{{ 'Modifier'|trans }}</a>
+            </div>
+            {{ include('section/_delete_form.html.twig') }}
+       
+    
+{% endblock %}
+

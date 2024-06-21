@@ -1,0 +1,20 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Gestion des Sections{% endblock %}
+
+{% block content %}
+    
+          
+                <h1 class="bg-dark text-white p-3 rounded">Modifier un club</h1>
+                <img src="{{ asset('uploads/images/' ~ club.logo) }}" width="100" class="rounded m-3">
+                {{ include('club/_form.html.twig', {'btn label': 'Mettre à jour'}) }}
+                <a href="{{ path('app_club_index') }}" class="btn btn-dark mt-2">Retour à la liste</a>
+                <hr>
+                <h4>Supprimer ce club</h4>
+                <form method="post" action="{{ path('app_club_delete', {'id': club.id}) }}" onsubmit="return confirm('Êtes-vous sûr(e) de vouloir supprimer cet item?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ club.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+      
+{% endblock %}
+

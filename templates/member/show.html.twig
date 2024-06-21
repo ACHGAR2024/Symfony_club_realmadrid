@@ -1,0 +1,68 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Gestion des Sections{% endblock %}
+
+{% block content %}
+    <h1 class="bg-dark text-white p-3 rounded">Membre</h1>
+{%if member.photo == '' %}   <img src="{{ asset('uploads/images/avatar.png') }}" alt="Logo" width="100" class="rounded m-3">   {% else %}
+    <img src="{{ asset('uploads/images/' ~ member.photo) }}" width="100" class="rounded m-3">{% endif %}
+    <table class="table table-dark table-striped table-hover">
+        <tbody class="table-group-divider ">
+            <tr>
+                <th class="bg-dark text-white">Identifiant</th>
+                <td>{{ member.id }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Prénom</th>
+                <td>{{ member.firstName }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Nom</th>
+                <td>{{ member.lastName }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Date de naissance</th>
+                <td>{{ member.birthDate ? member.birthDate|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Mail</th>
+                <td>{{ member.email }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Téléphone</th>
+                <td>{{ member.phone }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Post</th>
+                <td>{{ member.post }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">N°</th>
+                <td>{{ member.numero }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Contrat</th>
+                <td>{{ member.contratActuel ? member.contratActuel|date('d-m-Y') : '' }}</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Salaire</th>
+                <td>{{ ((member.salaire * 10)*12)/1000000 }} M.€</td>
+            </tr>
+            <tr>
+                <th class="bg-dark text-white">Equipe</th>
+                <td class="team-name">{{ member.team.name }}</td>
+            </tr>
+           
+        </tbody>
+    </table>
+
+
+
+    <div class="text-center">
+        <a href="{{ path('app_member_index') }}" class="btn btn-dark">Retour à la liste</a>
+        <a href="{{ path('app_member_edit', {'id': member.id}) }}" class="btn btn-warning">Modifier</a>
+    </div>
+
+    {{ include('member/_delete_form.html.twig') }}
+{% endblock %}
+

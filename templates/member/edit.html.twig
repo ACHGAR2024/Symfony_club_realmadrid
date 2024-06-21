@@ -1,0 +1,29 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Gestion des Sections{% endblock %}
+
+{% block content %}
+    
+        
+            <div style="position: absolute; right: 50px; top: 70px; z-index: 50">
+        {%if member.photo == '' %}  <td> <img src="{{ asset('uploads/images/avatar.png') }}" alt="Logo" width="100" class="rounded"> </td>  {% else %}
+            <img src="{{ asset('uploads/images/' ~ member.photo) }}" width="100" class="rounded">{% endif %}
+        </div>
+            <div class="col-md-6">
+                <h1 class="bg-dark text-white p-3 rounded">Modifier un membre</h1>
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                <div class="text-right">
+                    <button class="btn btn-primary text-white mb-2">{{ button_label|default('Mettre à jour') }}</button>
+                {{ form_end(form) }}
+                <div class="text-left">
+                    <a href="{{ path('app_member_index') }}" class="btn btn-dark">Retour à la liste</a>
+                </div>
+                </div>
+                <hr>
+                <h4 class="text-left">Supprimer ce membre</h4>
+                {{ include('member/_delete_form.html.twig') }}
+            </div>
+       
+    
+{% endblock %}

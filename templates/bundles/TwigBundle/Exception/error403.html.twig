@@ -1,0 +1,10 @@
+{# templates/bundles/TwigBundle/Exception/error404.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>erreur 403</h1>
+
+    <p>
+        Vous n'avez pas les droits pour voir cette page. Cliquez <a href="{{ path('app_homepage') }}">ici</a>.
+    </p>
+{% endblock %}

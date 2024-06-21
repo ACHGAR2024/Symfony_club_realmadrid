@@ -1,0 +1,93 @@
+<!-- ////////////////////////////////////////////////-->
+{% for club in clubs %}
+            <div class="card">
+                <div class="card-header" id="heading{{ club.id }}">
+                    <h5 class="mb-0">
+                        <button class="list-group-item list-group-item-action bg-dark text-white hover:bg-light" type="button" data-toggle="collapse" data-target="#collapse{{ club.id }}" aria-expanded="true" aria-controls="collapse{{ club.id }}">
+                        <img src="https://img.icons8.com/?size=42&id=37347&format=png&color=ffffff" alt="Logo">  {{ club.name }}
+                        </button>
+                    </h5>
+                </div>
+                
+                <div id="collapse{{ club.id }}" class="collapse show" aria-labelledby="heading{{ club.id }}" data-parent="#accordionExample">
+                    <div class="card-body">
+                        {% for section in club.sections %}  
+                            <h3 class="bg-primary rounded text-white p-3"><img src="https://img.icons8.com/?size=42&id=104882&format=png&color=ffffff" alt="Logo"> {{ section.name }}</h3>
+                            
+                            <div class="row">
+                                {% for team in section.teams %}
+                                    <div class="col-md-4 mb-3">
+                                        <div class="card bg-dark text-white shadow">
+                                            <div class="card-header">
+                                            <img src="https://img.icons8.com/?size=42&id=DdDHu4GGdXG8&format=png&color=ffffff" alt="Logo"> {{ team.name }}
+                                            </div>
+                                            <ul class="card list-group list-group-flush ">
+                                                {% for member in team.members %}
+                                                    <li class="card list-group-item text-dark shadow m-2">
+                                                    <tr>
+                                                        <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="https://img.icons8.com/fluency/48/000000/user-male-circle.png" width="50%"  alt="Logo" class="mr-2">
+                                                            <div>
+                                                                <span class="font-weight-bold">{{ member.firstName }} {{ member.lastName }}</span>
+                                                                <br> 
+                                                                <img src="https://img.icons8.com/?size=15&id=10053&format=png&color=000000" alt="Logo"> 
+                                                                
+                                                                {{ member.birthDate ? member.birthDate|date('d-m-Y') : '' }}
+                                                                
+                                                                <br> <img src="https://img.icons8.com/?size=18&id=jShwZ2RCyPSO&format=png&color=000000" alt="Logo"> {{ member.phone }}
+                                                                <br><img src="https://img.icons8.com/?size=18&id=86875&format=png&color=000000" alt="Logo">  {{ member.email}}
+                                                            </div>
+                                                        </div>
+                                                        </td>
+                                                        
+                                                        </li>
+                                                {% endfor %}
+
+
+                                            
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+<!-- ////////////////////////////////////////////////-->
+
+<!-- Partie Slider -->
+<div id="carouselExampleIndicators" class="carousel slide mt-3 mb-3" data-ride="carousel">
+<ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+
+</ol>
+<div class="carousel-inner">
+    <div class="carousel-item active">
+        <img class="d-block w-100 rounded" src="https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--f3eeae73-9734-446a-b954-83141e4db9bd/ND_Trofeos_Baloncesto_2023_2024.app.png?preferwebp=true&width=1440" alt="photo1">
+    </div>
+    <div class="carousel-item">
+        <img class="d-block w-100 rounded" src="https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--9a0fba20-1888-41a1-a689-4ad95bd3de52/ND_EQUIPO_LEVANTA_COPA_RS562996_.app.png?preferwebp=true&width=1440" alt="photo2">
+    </div>
+    <div class="carousel-item">
+        <img class="d-block w-100 rounded" src="https://publish-p47754-e237306.adobeaemcloud.com/adobe/dynamicmedia/deliver/dm-aid--aa9c319e-24b8-460a-b7b1-a196f5cd2e96/ND_J3_FINAL_LIGA_ENDESA_UCAM_RM_MUSA_MVP_COPA_1PC0707.app.png?preferwebp=true&width=1440" alt="photo3">
+    </div>
+    
+    
+</div>
+<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Précédent</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Suivant</span>
+</a>
+</div>
+
+<!-- Fin slider -->

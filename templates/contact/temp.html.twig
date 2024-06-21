@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+<div class="container">
+
+
+    
+    <div class="row" >
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4">
+                <div class="card-body">
+           
+            <div class = "container p-5" style="border-radius: 25px;
+            box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;">
+                <form id="contact-form" role="form">
+
+            
+
+                <div class="form-group">
+                    <label for="form_name" style="color: black;">Prénom *</label>
+                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Veuillez entrer votre prénom *" required="required" data-error="Prénom est requis.">
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="form_lastname " style="color: black;">Nom *</label>
+                    <input id="form_lastname" type="text" name="surname" class="form-control" placeholder="Veuillez entrer votre nom *" required="required" data-error="Nom est requis.">
+                                                        </div>
+
+                <div class="form-group">
+                    <label for="form_email" style="color: black;">Email *</label>
+                    <input id="form_email" type="email" name="email" class="form-control" placeholder="Veuillez entrer votre email *" required="required" data-error="Email valide est requis.">
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="form_need" style="color: black;">Veuillez spécifier votre besoin *</label>
+                    <select id="form_need" name="need" class="form-control" required="required" data-error="Veuillez spécifier votre besoin.">
+                        <option value="" selected disabled>--Sélectionnez votre besoin--</option>
+                        <option >Demande d'informations</option>
+                        <option >Réclamation</option>
+                        <option >Question</option>
+                        <option >Autre</option>
+                    </select>
+                    
+                </div>
+
+                <div class="form-group">
+                    <label for="form_message" style="color: black;">Message *</label>
+                    <textarea id="form_message" name="message" class="form-control" placeholder="Écrivez votre message ici." rows="4" required="required" data-error="Veuillez nous laisser un message."></textarea
+                        >
+                    </div>
+
+                <div class="form-group text-right">
+                    <input type="submit" class="btncontact" value="Envoyer le message" >
+                
+                </div>
+         
+                </div>
+
+
+            </div>
+             </form>
+            </div>
+            </div>
+
+
+        </div>
+        <!-- /.8 -->
+
+    </div>
+    <!-- /.row-->
+
+</div>
+</div>
+
+{% endblock %}
+

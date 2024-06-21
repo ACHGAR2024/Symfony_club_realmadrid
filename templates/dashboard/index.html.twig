@@ -1,0 +1,253 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block content %}
+
+{% set TotalMembersPerSection = [] %}
+{% set NbMembersSection = 0 %}
+{% set AgeSection = 0 %}  
+{% set AgeMoyenGlobal = 0 %}
+{% set TotalMembers = 0 %}
+{% set AgeMoyMembers = 0 %} 
+{% set AgeMoyenTable = [] %}
+{% set NT = 0 %}
+
+{% for club in clubs %}
+    {% for section in club.sections %}
+        {% set NbMembersSection = 0 %}
+        {% set AgeSection = 0 %}  
+
+        {% for team in section.teams %}
+            {% for member in team.members %}
+                {% if member.birthDate %}
+                    {% set now = 'now'|date('U') %}
+                    {% set birthDate = member.birthDate|date('U') %}
+                    {% set age = ((now - birthDate) / (60 * 60 * 24 * 365))|round(0, 'floor') %}
+                    {% set AgeSection = AgeSection + age %}
+                    {% set NbMembersSection = NbMembersSection + 1 %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        
+        {% if NbMembersSection > 0 %}
+            {% set AgeMoyenSection = AgeSection / NbMembersSection %}
+            {% set AgeMoyenTable = AgeMoyenTable|merge([AgeMoyenSection|number_format(0)]) %}
+            {% set TotalMembersPerSection = TotalMembersPerSection|merge([NbMembersSection]) %}
+            {% set AgeMoyMembers = AgeMoyMembers + AgeSection %}
+            {% set TotalMembers = TotalMembers + NbMembersSection %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% set AgeMoyenGlobal = AgeMoyMembers / TotalMembers %}
+
+<div>
+    {% for ageMoyen in AgeMoyenTable %}
+      <!--  - {{ ageMoyen }} ans moyen par section<br>-->
+    {% endfor %}
+    <br>
+   <!-- Moyenne globale : {{ AgeMoyenGlobal|number_format(2) }} ans-->
+</div>
+
+<div class="example-wrapper">
+    <h1 class="bg-dark text-white p-3 rounded">Tableau de bord</h1>
+    <!-- ////////////////////////////////////////////////-->
+
+    <div class="card">
+        <div class="row p-3">
+            <div class="col-md-4 mb-3">
+                <div class="card bg-dark text-white shadow">
+                    <div class="card-header">
+                        Informations Générales
+                    </div>
+                    <ul class="card list-group list-group-flush ">
+                        <li class="card list-group-item text-dark shadow m-2">
+                            <img src="https://img.icons8.com/?size=18&id=21234&format=png&color=000000" alt="Logo"> Nombre de clubs: 
+                            <span class="badge badge-info">{{ clubs|length }}</span>
+                        </li>
+                        <li class="card list-group-item text-dark shadow m-2">
+                            <img src="https://img.icons8.com/?size=18&id=21234&format=png&color=000000" alt="Logo"> Total membres:  
+                            <span class="badge badge-info">{{ TotalMembers }}</span>                    
+                        </li>
+                        <li class="card list-group-item text-dark shadow m-2">
+                            <img src="https://img.icons8.com/?size=18&id=86075&format=png&color=000000" alt="Logo"> Âge moyen:  
+                            <span class="badge badge-info">{{ AgeMoyenGlobal|number_format(2) }} ans</span>    
+                        </li>
+                    </ul>
+                </div>
+                
+                
+            </div>
+                <div class="d-none d-md-block" style="position: absolute; right: 100px; top: 30px;" class="col-md-8">
+                  {% for club in clubs %}  <img src="{{ asset('uploads/images/' ~ club.logo) }}" width="80" class="rounded">
+                    <br>
+                    <p>{{ club.name }}</p>{% endfor %}
+                </div>
+               
+        </div>
+    </div>
+    <div class="card bg-light text-white shadow">
+    <!-- Ajoutez un canvas pour le graphique -->
+<div class="row p-3 w-100">
+
+                 <h4 class="bg-dark text-white ml-3 p-2 rounded text-ms"> Membre par section</h4>
+                  
+
+<div class="col-md-12 text-white m-1">
+<canvas id="membersChart" class=""></canvas>
+</div>
+</div>
+    </div>
+    {% for club in clubs %}
+        <div id="collapse{{ club.id }}" class="collapse show" aria-labelledby="heading{{ club.id }}" data-parent="#accordionExample">
+            <div class="card-body">
+                <h3 class="bg-primary rounded text-white p-3">
+                    <img src="{{ asset('uploads/images/' ~ club.logo) }}" width="80" class="rounded"> Statistiques {{ club.name }}
+                </h3>
+                {% for section in club.sections %}
+                    <div class="row">
+                        {% for team in section.teams %}
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-dark text-white shadow">
+                                    <div class="card-header">
+                                        <img src="{{ asset('uploads/images/' ~ team.photo) }}" width="60" class="rounded"> {{ team.name }}
+                                    </div>
+                                    <ul class="card list-group list-group-flush ">
+                                        <li class="card list-group-item text-dark shadow m-2">
+                                            <img src="https://img.icons8.com/?size=18&id=21234&format=png&color=000000" alt="Logo"> Nombre de membres: <span class="badge badge-info"> {{ team.members|length }}</span>
+                                        </li>
+                                        <li class="card list-group-item text-dark shadow m-2">
+                                            <img src="https://img.icons8.com/?size=18&id=86075&format=png&color=000000" alt="Logo">Âge moyen: <span class="badge badge-info">  <!-- // calculate age moyen of members-->
+                                                {% set age = 'N/A' %}
+                                                {% if team.members %}
+                                                    {% set now = 'now'|date('U') %}
+                                                    {% set birthDate = team.members[0].birthDate|date('U') %}
+                                                    {% set age = ((now - birthDate) / (60 * 60 * 24 * 365))|round(0, 'floor') %}
+                                                {% endif %}
+                                                {{ age }} ans
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="accordion" id="accordionExample">
+    {% for club in clubs %}
+        <div class="card">
+            <div class="card-header" id="heading{{ club.id }}">
+                <h5 class="mb-0">
+                    <button class="list-group-item list-group-item-action bg-dark text-white hover:bg-light" type="button" data-toggle="collapse" data-target="#collapse{{ club.id }}" aria-expanded="true" aria-controls="collapse{{ club.id }}">
+                        <img src="{{ asset('uploads/images/' ~ club.logo) }}" width="40" class="rounded"> {{ club.name }}
+                    </button>
+                </h5>
+            </div>
+            <div id="collapse{{ club.id }}" class="collapse show" aria-labelledby="heading{{ club.id }}" data-parent="#accordionExample">
+                <div class="card-body">
+                    {% for section in club.sections %}
+                        <h3 class="bg-primary rounded text-white p-3"><img src="{{ asset('uploads/images/' ~ section.photo) }}" width="80" class="rounded"> {{ section.name }}</h3>
+                        <div class="row">
+                            {% for team in section.teams %}
+                                <div class="col-md-4 mb-3">
+                                    <div class="card bg-dark text-white shadow">
+                                        <div class="card-header">
+                                            <img src="{{ asset('uploads/images/' ~ team.photo) }}" width="42" class="rounded"> {{ team.name }}
+                                        </div>
+                                        <ul class="card list-group list-group-flush">
+                                            {% for member in team.members %}
+                                                <li class="card list-group-item text-dark shadow m-2 w-1/2 d-flex flex-row">
+                                                    <div class="d-flex flex-column justify-content-between w-50">
+                                                        {% if member.photo == '' %}
+                                                            <img src="{{ asset('uploads/images/avatar.png') }}" alt="Logo" width="80" class="rounded m-3">
+                                                        {% else %}
+                                                            <img src="{{ asset('uploads/images/' ~ member.photo) }}" width="80" class="rounded m-3">
+                                                        {% endif %}
+                                                        <div>
+                                                            <span class="font-weight-bold">{{ member.firstName }} {{ member.lastName }} </span>
+                                                            <br> 
+                                                            <img src="https://img.icons8.com/?size=15&id=10053&format=png&color=000000" alt="Logo"> 
+                                                            {{ member.birthDate ? member.birthDate|date('d-m-Y') : '' }} ( {% set age = 'N/A' %}
+                                                            {% if member.birthDate %}
+                                                                {% set now = 'now'|date('U') %}
+                                                                {% set birthDate = member.birthDate|date('U') %}
+                                                                {% set age = ((now - birthDate) / (60 * 60 * 24 * 365))|round(0, 'floor') %}
+                                                            {% endif %}
+                                                            {{ age }} ans)
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex flex-column justify-content-between w-50">
+                                                        <div>
+                                                            <img src="https://img.icons8.com/?size=18&id=jShwZ2RCyPSO&format=png&color=000000" alt="Logo"> {{ member.phone }}
+                                                            <br>
+                                                            <img src="https://img.icons8.com/?size=18&id=86875&format=png&color=000000" alt="Logo">  {{ member.email }}
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<!-- Ajoutez Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    var ctx = document.getElementById('membersChart').getContext('2d');
+    var totalMembersData = {{ TotalMembersPerSection|json_encode|raw }};
+    console.log('Total Members Data:', totalMembersData);
+    
+    var sectionLabels = [{% for club in clubs %}{% for section in club.sections %}"{{ club.name }} - {{ section.name }}",{% endfor %}{% endfor %}];
+    console.log('Section Labels:', sectionLabels);
+    
+
+    var membersChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: sectionLabels,
+            datasets: [{
+                label: 'Total membres par section',
+                data: totalMembersData,
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }   
+            },
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    ticks: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

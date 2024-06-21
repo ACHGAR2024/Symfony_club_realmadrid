@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Inscrivez-vous
+{% endblock %}
+
+{% block body %}
+<div class="wrapper">
+    <div class="logo">
+        <img src="https://img.icons8.com/?size=100&id=37347&format=png&color=000000" alt="">
+    </div>
+    <br>
+    <div class="alert alert-danger" role="alert" style="display: none" id="error-container">
+        <ul id="error-list">
+        </ul>
+    </div>
+    <br>
+    <div class="text-left name">
+        {{ form_start(registrationForm) }}
+
+        <div class="form-field">
+            {{ form_row(registrationForm.email, {
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'Email',
+                        'autocomplete': 'email',
+                        'pattern': '.+@.+\..+',
+                        'title': 'Veuillez saisir une adresse email valide'
+                    }
+                }) }}
+        </div>
+        <div class="form-field">
+            {{ form_row(registrationForm.plainPassword, {
+                    'label': 'Mot de passe',
+                    'attr': {
+                        'placeholder': 'Mot de passe',
+                        'class': 'form-control',
+                        'autocomplete': 'new-password',
+                        'pattern': '.{8,}',
+                        'title': 'Veuillez saisir un mot de passe de 8 caractères minimum'
+                    }
+                }) }}
+        </div>
+
+        <div class="custom-form-check">
+            {{ form_row(registrationForm.agreeTerms, {
+                'label_attr': {
+                    'class': 'custom-label'
+                },
+                'attr': {
+                    'class': 'custom-form-control'
+                }
+            }) }} <br>
+                {{ form_end(registrationForm) }}
+                <br>
+            
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Inscrivez-vous
+        </button>
+
+       
+    </div>
+</div>
+{% endblock %}
+
+
+

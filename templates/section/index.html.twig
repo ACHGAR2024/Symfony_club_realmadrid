@@ -1,0 +1,43 @@
+{% extends 'dashboard.html.twig' %}
+
+{% block title %}Gestion des Sections{% endblock %}
+
+{% block content %}
+    
+        <h1 class="bg-dark text-white p-3 rounded mb-3">Gestion des Sections</h1>
+        <div class="text-right"> <a href="{{ path('app_section_new') }}" class="btn btn-success mb-2">Créer une nouvelle section</a></div>
+        <table class="table table-striped bg-light">
+            <thead>
+                <tr>
+                    <th class="bg-dark text-white">Id</th>
+                    <th class="bg-dark text-white">Photo</th>
+                    <th class="bg-dark text-white">Nom</th>
+                    <th class="bg-dark text-white">Description</th>
+                    
+                    <th class="bg-dark text-white">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for section in sections %}
+                <tr>
+                    <td>{{ section.id }}</td>
+                     <td><img src="../uploads/images/{{ section.photo }}" width="100"></td>    
+                    <td>{{ section.name }}</td>
+                    <td>{{ section.description }}</td>
+                   
+                   
+                    <td>
+                        <a href="{{ path('app_section_show', {'id': section.id}) }}" class="btn btn-primary mt-2">Voir</a>
+                        <a href="{{ path('app_section_edit', {'id': section.id}) }}" class="btn btn-warning mt-2">Modifier</a>
+                        <a href="{{ path('app_section_delete', {'id': section.id}) }}" class="btn btn-danger mt-2">Supprimer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">Aucun enregistrement trouvé</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+   
+{% endblock %}
